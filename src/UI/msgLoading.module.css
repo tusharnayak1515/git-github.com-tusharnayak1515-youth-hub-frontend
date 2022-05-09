@@ -1,0 +1,15 @@
+.loading {
+    height: 100%;
+    width: 60%;
+    margin: auto;
+    position: relative;
+    text-align: center;
+    /* background-color: orange; */
+  }
+  
+  .loading img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

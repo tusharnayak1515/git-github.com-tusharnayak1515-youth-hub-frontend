@@ -1,0 +1,147 @@
+.currentChat {
+    position: relative;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* overflow: scroll; */
+    /* background-color: palegreen; */
+}
+
+.receiver {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-height: 12vh;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.1rem solid rgb(201, 201, 201);
+    z-index: 1000;
+    background-color: white;
+}
+
+.messageArea {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(80vh - 12vh - 12vh);
+    overflow: scroll;
+    /* background-color: olivedrab; */
+}
+
+.receiver img {
+    width: 3rem;
+    height: 3rem;
+    border: 0.2rem solid #022f95;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.messageBox {
+    position: sticky;
+    /* top: 100%; */
+    bottom: 0;
+    width: 100%;
+    min-height: 12vh;
+    display: flex;
+    /* margin: 0.5rem 0; */
+    justify-content: center;
+    align-items: center;
+    /* border: 0.05rem solid rgb(203, 203, 203); */
+    /* border-radius: 2rem; */
+    background-color: white;
+    /* background-color: rebeccapurple; */
+}
+
+.messageBox input {
+    outline: none;
+    width: 90%;
+    height: 3rem;
+    padding: 0.5rem 2rem;
+    font-size: 1.1rem;
+    border: 0.05rem solid rgb(203, 203, 203);
+    border-radius: 2rem;
+}
+
+.userpic {
+    width: 2rem;
+    height: 2rem;
+    border: 0.2rem solid #022f95;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.mypic {
+    width: 2rem;
+    height: 2rem;
+    border: 0.2rem solid #022f95;
+    border-radius: 50%;
+    margin-left: 0.5rem;
+}
+
+/* .receiver h2 {
+    
+} */
+
+.me {
+    width: 100%;
+    padding: 0.2rem;
+    margin-top: 0.4rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    /* background-color: yellow; */
+}
+
+.me h3 {
+    font-weight: normal;
+    text-align: right;
+    min-width: 10%;
+    max-width: 60%;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.8rem;
+    background-color: rgb(203, 203, 203);
+}
+
+.other {
+    width: 100%;
+    padding: 0.2rem;
+    margin-top: 0.4rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: aqua; */
+}
+
+.other h3 {
+    font-weight: normal;
+    text-align: center;
+    min-width: 10%;
+    padding: 0.5rem 1rem;
+    border: none;
+    /* border: 0.05rem solid rgb(203, 203, 203); */
+    border-radius: 0.8rem;
+    background-color: #c8e6fe;
+}
+
+.default {
+    width: 80%;
+    margin: auto;
+    margin-top: 30%;
+    color: rgb(154, 153, 153);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.default h1 {
+    text-align: center;
+}

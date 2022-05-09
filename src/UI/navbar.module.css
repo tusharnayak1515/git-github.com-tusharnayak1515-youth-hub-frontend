@@ -1,0 +1,21 @@
+.navbar {
+    width: 25vw;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #c8e6fe;
+}
+
+.links {
+    padding: 0 0.1rem;
+    color: grey !important;
+}
+
+.links:hover, .links.active {
+    background-color: #022f95;
+    color: aqua !important;
+}

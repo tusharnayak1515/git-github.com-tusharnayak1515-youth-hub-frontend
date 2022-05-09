@@ -1,0 +1,15 @@
+.suggestions {
+    position: sticky;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 1rem 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.suggestions h1 {
+    margin-bottom: 2rem;
+}

@@ -1,0 +1,87 @@
+.post {
+    width: 45rem;
+    height: 45rem;
+    padding: 0.3rem 0;
+    margin-bottom: 2rem;
+    border: 0.1rem solid rgb(205, 205, 205);
+    background-color: white;
+}
+
+.post img {
+    width: 100%;
+    height: 67%;
+    /* height: 40vw; */
+}
+
+.topDiv {
+    padding-right: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: aquamarine; */
+}
+
+.topDiv .postUser {
+    padding: 0.5rem 0.6rem;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.topDiv .postUser img {
+    width: 3rem;
+    height: 3rem;
+    border: 0.2rem solid #022f95;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.topDiv .dotMenu {
+    font-size: 3rem;
+    color: grey;
+    cursor: pointer;
+}
+
+.bottomDiv {
+    padding: 0.5rem 0.9rem;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* background-color: yellow; */
+}
+
+.bottomDiv .caption {
+    margin-left: 0.5rem;
+    font-weight: normal;
+}
+
+.comments {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    color: gray;
+}
+
+.reactions {
+    padding: 0.5rem 0.7rem;
+    padding-right: 2rem;
+    margin-bottom: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: orange; */
+}
+
+.flexDiv {
+    width: 12%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: lawngreen; */
+}
+
+.likeDiv {
+    width: 30%;
+    /* background-color: lawngreen; */
+}

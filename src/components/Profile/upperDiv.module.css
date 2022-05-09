@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200&display=swap');
+
+.upperDiv {
+    width: 75%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-bottom: 0.1rem solid rgb(180, 180, 180); */
+    /* background-color: pink; */
+}
+
+.upperDiv img {
+    width: 13vw;
+    height: 13vw;
+    border: 0.2rem solid #022f95;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.upperDiv img:hover {
+    opacity: 0.85;
+}
+
+.upperDiv .rightDiv {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: yellow; */
+}
+
+.upperDiv .rightDiv .details {
+    width: 60%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: orange; */
+}
+
+.upperDiv .rightDiv .details h1 {
+    /* color: rgb(92, 92, 92); */
+    font-family: 'Nunito', sans-serif;
+    font-weight: normal !important;
+}
+
+.upperDiv .rightDiv .details button {
+    padding: 0.2rem 0.5rem;
+    font-size: 1.2rem;
+    outline: none;
+    border: 0.05rem solid rgb(185, 185, 185);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    background-color: white;
+}
+
+.links {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.upperDiv .rightDiv .counts {
+    width: 60%;
+    padding: 0.5rem 1.2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: red; */
+}
+
+.upperDiv .rightDiv .counts span {
+    font-weight: normal;
+}
+
+.upperDiv .rightDiv .name {
+    width: 60%;
+    padding: 0.5rem 1.1rem;
+    /* background-color: aqua; */
+}
+
+.upperDiv .rightDiv .bio {
+    width: 60%;
+    padding: 0.5rem 1.1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: hotpink; */
+}
+
+.upperDiv .rightDiv .bio h2 {
+    font-weight: normal;
+    color: rgb(64, 64, 64);
+}
