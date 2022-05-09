@@ -30,9 +30,11 @@ const CurrentChat = ({ profile, receiver, click }) => {
     }
   };
 
+  
   useEffect(() => {
     // console.log("run");
     if (receiver) {
+      console.log(messages);
       dispatch(actionCreators.getMessages(receiver._id));
     }
   }, [messages.length, dispatch, receiver]);
