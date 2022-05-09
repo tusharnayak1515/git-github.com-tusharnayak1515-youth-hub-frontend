@@ -6,13 +6,14 @@ import MsgLoading from "../../UI/MsgLoading";
 
 import styles from "./currentChat.module.css";
 
-const CurrentChat = ({ profile, receiver, click }) => {
+const CurrentChat = ({ profile, receiver, click, onlineUsers, setOnlineUsers }) => {
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.messageReducer.messages,shallowEqual);
   const isLoading = useSelector(state=> state.messageReducer.isLoading,shallowEqual);
   const [newMsg, setNewMsg] = useState("");
   const [arrivedMsg, setArrivedMsg] = useState(null);
   const socket = useRef();
+  const scrollRef = useRef(null);
 
   const onMsgChange = (e) => {
     e.preventDefault();
@@ -52,21 +53,33 @@ const CurrentChat = ({ profile, receiver, click }) => {
     socket.current.emit("addUser", profile._id);
     socket.current.on("getUsers", (users)=> {
       // console.log(users);
+      setOnlineUsers(users);
+      // for(let i=0; i < users.length; i++) {
+      //   console.log(users[i],users[i].status);
+      //   if(users[i].status === "online") {
+      //     setOnlineUsers([...onlineUsers, users[i].userId]);
+      //   }
+      // }
     })
-  },[profile._id]);
+  },[profile._id, dispatch]);
   
   useEffect(() => {
     // console.log("run");
     if (receiver) {
-      dispatch(actionCreators.getMessages(receiver._id));
+      dispatch(actionCreators.getMessages(receiver?._id));
     }
-  }, [dispatch, receiver]);
+    // eslint-disable-next-line
+  }, [dispatch, receiver?._id]);
 
   useEffect(()=> {
     if(arrivedMsg) {
-      dispatch(actionCreators.receiveMessages(receiver._id));
+      dispatch(actionCreators.receiveMessages(receiver?._id));
     }
   },[dispatch, arrivedMsg, receiver?._id]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   if (isLoading) {
     return <MsgLoading />;
@@ -74,7 +87,6 @@ const CurrentChat = ({ profile, receiver, click }) => {
 
   return (
     <div className={styles.currentChat}>
-      {/* {console.log(messages.length !== 0 ? messages : "yes")} */}
       {click && receiver && messages.length !== 0 && (
         <div className={styles.receiver}>
           <img src={receiver.profilepic} alt={receiver.username} />
@@ -87,7 +99,7 @@ const CurrentChat = ({ profile, receiver, click }) => {
             return (
               <Fragment key={chat._id}>
                 {chat.sender._id === profile._id && (
-                  <div className={styles.me}>
+                  <div className={styles.me} ref={scrollRef}>
                     {chat.text ? (
                       <h3>{chat.text}</h3>
                     ) : (
@@ -104,7 +116,7 @@ const CurrentChat = ({ profile, receiver, click }) => {
                 )}
 
                 {chat.sender._id === receiver._id && (
-                  <div className={styles.other}>
+                  <div className={styles.other} ref={scrollRef}>
                     <img
                       src={chat.sender.profilepic}
                       alt={chat.sender.username}

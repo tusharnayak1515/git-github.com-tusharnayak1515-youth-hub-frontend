@@ -29,8 +29,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: calc(80vh - 12vh - 12vh);
-    overflow: scroll;
+    min-height: calc(56vh);
+    overflow-y: scroll;
     /* background-color: olivedrab; */
 }
 

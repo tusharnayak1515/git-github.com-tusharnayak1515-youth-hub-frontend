@@ -6,10 +6,12 @@ import styles from './following.module.css';
 
 const Following = () => {
   const dispatch = useDispatch();
-  const {profile} = useSelector(state=> state.userReducer,shallowEqual);
+  const {profile, onlineUsers} = useSelector(state=> state.userReducer,shallowEqual);
+
   useEffect(()=> {
     dispatch(actionCreators.profile());
-  },[dispatch])
+  },[dispatch]);
+
   return (
     <div className={styles.following}>
         <h4 className={styles.head}>FOLLOWING</h4>
@@ -21,7 +23,8 @@ const Following = () => {
                     <img src={fuser.profilepic} alt={fuser.name} />
                     <h4>{fuser.name}</h4>
                 </div>
-                <h6>{new Date().getSeconds()}</h6>
+                {/* {console.log(onlineUsers.includes(fuser._id))} */}
+                {/* <h6>{onlineUsers.includes(fuser._id) ? 'Online' : 'Offline'}</h6> */}
             </div>
           }
           return null;

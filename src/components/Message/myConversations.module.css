@@ -1,12 +1,12 @@
 .mycnvs {
     width: 40%;
+    height: 80vh;
     /* padding: 1rem; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     /* align-items: center; */
     border-right: 0.1rem solid rgb(201, 201, 201);
-    overflow: scroll;
     /* background-color: pink; */
 }
 
@@ -35,9 +35,11 @@
 }
 
 .bottom {
+    height: 100%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
     /* justify-content: ; */
     /* background-color: yellowgreen; */
 }

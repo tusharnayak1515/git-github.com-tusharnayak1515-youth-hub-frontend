@@ -102,6 +102,7 @@ const Message = () => {
   const { profile } = useSelector((state) => state.userReducer,shallowEqual);
   const [click, setClick] = useState(false);
   const [receiver, setReceiver] = useState();
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
     // console.log("yes");
@@ -109,8 +110,8 @@ const Message = () => {
   }, [dispatch]);
   return (
     <div className={styles.message_container}>
-      <MyConversations profile={profile} setClick={setClick} setReceiver={setReceiver} />
-      <CurrentChat profile={profile} receiver={receiver} click={click} />
+      <MyConversations profile={profile} setClick={setClick} setReceiver={setReceiver} onlineUsers={onlineUsers} />
+      <CurrentChat profile={profile} receiver={receiver} click={click} setOnlineUsers={setOnlineUsers} onlineUsers={onlineUsers} />
     </div>
   );
 };
