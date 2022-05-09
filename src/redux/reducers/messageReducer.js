@@ -24,7 +24,7 @@ const initState = {
 
 const messageReducer = (state=initState, action)=> {
 
-    if(action.type === 'loading') {
+    if(action.type === 'msg-loading') {
         return {
             ...state,
             isLoading: true

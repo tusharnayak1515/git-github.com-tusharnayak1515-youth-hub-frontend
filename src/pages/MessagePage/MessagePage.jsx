@@ -18,8 +18,8 @@ const MessagePage = () => {
 
   return (
     <div className={styles.messagePage}>
-        <Navbar />
-        <Message />
+        {user && <Navbar />}
+        {user && <Message />}
     </div>
   )
 }

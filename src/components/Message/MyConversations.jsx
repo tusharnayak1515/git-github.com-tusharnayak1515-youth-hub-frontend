@@ -12,11 +12,10 @@ const MyConversations = ({profile, setClick, setReceiver}) => {
   const cnvLength = [...myConversations].length;
 
   useEffect(() => {
-    // console.log("yes");
     dispatch(actionCreators.getConversations());
-  }, [messages,cnvLength, dispatch]);
+  }, [messages, cnvLength, dispatch]);
   
-  const onCnvClick = (receiver)=> {
+  const onCnvClick = (receiver,cnv)=> {
     setReceiver(receiver);
     setClick(true);
   }
@@ -34,7 +33,7 @@ const MyConversations = ({profile, setClick, setReceiver}) => {
             myConversations.map((cnv) => {
               return (
                 <div key={cnv._id} className={styles.cflex}>
-                  <div className={styles.cnv} onClick={()=> onCnvClick(cnv.recipients[0]._id === profile._id ? cnv.recipients[1] : cnv.recipients[0])}>
+                  <div className={styles.cnv} onClick={()=> onCnvClick(cnv.recipients[0]._id === profile._id ? cnv.recipients[1] : cnv.recipients[0],cnv)}>
                     <img
                       // style={{ width: "4rem" }}
                       src={
@@ -46,9 +45,9 @@ const MyConversations = ({profile, setClick, setReceiver}) => {
                     />
                     <div className={styles.flex}>
                       <h2>
-                        {cnv.recipients[1]
-                          ? cnv.recipients[1].name
-                          : "Deleted User"}
+                        {cnv.recipients[0]._id === profile._id
+                          ? cnv.recipients[1].name ? cnv.recipients[1].name : "Deleted User"
+                          : cnv.recipients[0].name ? cnv.recipients[0].name : "Deleted User"}
                       </h2>
                       <p>{cnv.recipients[0]._id === profile._id ? 'You' : cnv.recipients[0].username}: {cnv.text}</p>
                     </div>

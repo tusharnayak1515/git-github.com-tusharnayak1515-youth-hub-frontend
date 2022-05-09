@@ -380,9 +380,9 @@ export const logout = ()=> async (dispatch)=> {
 
 // *************MESSAGE SECTION******************\\
 export const getConversations = ()=> async (dispatch)=> {
-    dispatch({
-        type: 'loading'
-    });
+    // dispatch({
+    //     type: 'msg-loading'
+    // });
 
     const token = localStorage.getItem("youth_token");
     try {
@@ -421,7 +421,7 @@ export const getConversations = ()=> async (dispatch)=> {
 
 export const getMessages = (receiverId)=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'msg-loading'
     });
 
     const token = localStorage.getItem("youth_token");
@@ -457,18 +457,57 @@ export const getMessages = (receiverId)=> async (dispatch)=> {
     }
 }
 
-export const sendMessage = ({text,images,receiver})=> async (dispatch)=> {
-    dispatch({
-        type: 'loading'
-    });
+export const receiveMessages = (receiverId)=> async (dispatch)=> {
+    // dispatch({
+    //     type: 'msg-loading'
+    // });
 
     const token = localStorage.getItem("youth_token");
     try {
-        const res = await axios.post(`http://localhost:5000/api/message/${receiver}`,
+        const res = await axios.get(`http://localhost:5000/api/message/msg/${receiverId}`,{headers: {'auth-token': token}});
+        if(res.data.success) {
+            dispatch({
+                type: 'get-msgs',
+                payload: {
+                    msgs: res.data.messages,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'get-msgs',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'get-msgs',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+}
+
+export const sendMessage = ({socket,text,images,receiverId})=> async (dispatch)=> {
+    // dispatch({
+    //     type: 'loading'
+    // });
+
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.post(`http://localhost:5000/api/message/${receiverId}`,
         {text,images},
         {headers: {'auth-token': token}});
 
         if(res.data.success) {
+            socket.current.emit("sendMessage", res.data.message);
             dispatch({
                 type: 'send-msg',
                 payload: {
