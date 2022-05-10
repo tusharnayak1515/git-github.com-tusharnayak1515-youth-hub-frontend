@@ -6,7 +6,7 @@ import styles from './following.module.css';
 
 const Following = () => {
   const dispatch = useDispatch();
-  const {profile, onlineUsers} = useSelector(state=> state.userReducer,shallowEqual);
+  const {profile} = useSelector(state=> state.userReducer,shallowEqual);
 
   useEffect(()=> {
     dispatch(actionCreators.profile());

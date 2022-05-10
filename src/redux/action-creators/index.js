@@ -419,15 +419,17 @@ export const getConversations = ()=> async (dispatch)=> {
     }
 }
 
-export const getMessages = (receiverId)=> async (dispatch)=> {
+export const getMessages = (receiverId,senderId)=> async (dispatch)=> {
     dispatch({
         type: 'msg-loading'
     });
 
     const token = localStorage.getItem("youth_token");
     try {
-        const res = await axios.get(`http://localhost:5000/api/message/msg/${receiverId}`,{headers: {'auth-token': token}});
+        // console.log(senderId);
+        const res = await axios.get(`http://localhost:5000/api/message/msg/${senderId}/${receiverId}`,{headers: {'auth-token': token}});
         if(res.data.success) {
+            // console.log(res.data);
             dispatch({
                 type: 'get-msgs',
                 payload: {
@@ -438,6 +440,7 @@ export const getMessages = (receiverId)=> async (dispatch)=> {
         }
 
         if(res.data.error) {
+            console.log("error in getMessages");
             localStorage.setItem("youth_error",res.data.error);
             dispatch({
                 type: 'get-msgs',
@@ -457,15 +460,16 @@ export const getMessages = (receiverId)=> async (dispatch)=> {
     }
 }
 
-export const receiveMessages = (receiverId)=> async (dispatch)=> {
+export const receiveMessages = (receiverId,senderId)=> async (dispatch)=> {
     // dispatch({
     //     type: 'msg-loading'
     // });
 
     const token = localStorage.getItem("youth_token");
     try {
-        const res = await axios.get(`http://localhost:5000/api/message/msg/${receiverId}`,{headers: {'auth-token': token}});
+        const res = await axios.get(`http://localhost:5000/api/message/msg/${senderId}/${receiverId}`,{headers: {'auth-token': token}});
         if(res.data.success) {
+            // console.log(res.data);
             dispatch({
                 type: 'get-msgs',
                 payload: {
@@ -476,6 +480,7 @@ export const receiveMessages = (receiverId)=> async (dispatch)=> {
         }
 
         if(res.data.error) {
+            console.log("error in receiveMessages");
             localStorage.setItem("youth_error",res.data.error);
             dispatch({
                 type: 'get-msgs',
@@ -495,14 +500,16 @@ export const receiveMessages = (receiverId)=> async (dispatch)=> {
     }
 }
 
-export const sendMessage = ({socket,text,images,receiverId})=> async (dispatch)=> {
+export const sendMessage = ({socket,text,images,receiverId,senderId})=> async (dispatch)=> {
     // dispatch({
     //     type: 'loading'
     // });
 
     const token = localStorage.getItem("youth_token");
     try {
-        const res = await axios.post(`http://localhost:5000/api/message/${receiverId}`,
+        // console.log("Sender: ",senderId);
+        // console.log("Receiver: ",receiverId);
+        const res = await axios.post(`http://localhost:5000/api/message/${senderId}/${receiverId}`,
         {text,images},
         {headers: {'auth-token': token}});
 

@@ -6,7 +6,7 @@ import MsgLoading from "../../UI/MsgLoading";
 
 import styles from "./currentChat.module.css";
 
-const CurrentChat = ({ profile, receiver, click, onlineUsers, setOnlineUsers }) => {
+const CurrentChat = ({ profile, receiver, setReceiver, sender, setSender, click, setOnlineUsers }) => {
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.messageReducer.messages,shallowEqual);
   const isLoading = useSelector(state=> state.messageReducer.isLoading,shallowEqual);
@@ -20,11 +20,26 @@ const CurrentChat = ({ profile, receiver, click, onlineUsers, setOnlineUsers }) 
     setNewMsg(e.target.value);
   };
 
+  const onInputClick = (e)=> {
+    e.preventDefault();
+    
+    if(receiver?._id === profile._id) {
+      let r = receiver;
+      let s = sender;
+      setSender(r);
+      setReceiver(s);
+    }
+  }
+
   const onSendMsg = (e) => {
+
     if (e.key === "Enter") {
       e.preventDefault();
       if (newMsg !== "") {
-        dispatch(actionCreators.sendMessage({socket, receiverId: receiver._id, text: newMsg }));
+        // console.log("sender: ",sender?._id);
+        // console.log("receiver: ",receiver?._id);
+        // console.log("profile: ",profile?._id);
+        dispatch(actionCreators.sendMessage({socket, receiverId: receiver?._id, senderId: sender?._id, text: newMsg }));
         setNewMsg("");
       }
     }
@@ -60,22 +75,25 @@ const CurrentChat = ({ profile, receiver, click, onlineUsers, setOnlineUsers }) 
       //     setOnlineUsers([...onlineUsers, users[i].userId]);
       //   }
       // }
-    })
+    });
+    // eslint-disable-next-line
   },[profile._id, dispatch]);
   
   useEffect(() => {
     // console.log("run");
     if (receiver) {
-      dispatch(actionCreators.getMessages(receiver?._id));
+      dispatch(actionCreators.getMessages(receiver?._id,sender?._id));
     }
     // eslint-disable-next-line
-  }, [dispatch, receiver?._id]);
+  }, [dispatch, receiver?._id, sender?._id]);
 
   useEffect(()=> {
+    // console.log("run");
+    // console.log(Date.now(),arrivedMsg);
     if(arrivedMsg) {
-      dispatch(actionCreators.receiveMessages(receiver?._id));
+      dispatch(actionCreators.receiveMessages(receiver?._id,sender?._id));
     }
-  },[dispatch, arrivedMsg, receiver?._id]);
+  },[dispatch, arrivedMsg, receiver?._id, sender?._id]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -115,7 +133,7 @@ const CurrentChat = ({ profile, receiver, click, onlineUsers, setOnlineUsers }) 
                   </div>
                 )}
 
-                {chat.sender._id === receiver._id && (
+                {chat.sender._id === receiver?._id && (
                   <div className={styles.other} ref={scrollRef}>
                     <img
                       src={chat.sender.profilepic}
@@ -135,7 +153,7 @@ const CurrentChat = ({ profile, receiver, click, onlineUsers, setOnlineUsers }) 
         )}
       </div>
       {click && receiver && messages.length !== 0 && (
-        <div className={styles.messageBox}>
+        <div className={styles.messageBox} onClick={onInputClick}>
           <input
             type="text"
             name="text"

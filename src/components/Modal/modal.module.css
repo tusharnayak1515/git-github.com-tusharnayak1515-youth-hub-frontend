@@ -9,9 +9,9 @@
     overflow: hidden;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .modal {
     position: absolute;
