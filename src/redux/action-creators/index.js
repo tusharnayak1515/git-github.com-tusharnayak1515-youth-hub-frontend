@@ -371,6 +371,51 @@ export const search = (name)=> async (dispatch)=> {
     }
 }
 
+export const getUser = (id)=> async (dispatch)=> {
+    dispatch({
+        type: 'loading'
+    });
+
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.get(`http://localhost:5000/api/auth/user/${id}`,{headers: {'auth-token': token}});
+
+        if(res.data.success) {
+            dispatch({
+                type: 'get-user',
+                payload: {
+                    otherUser: res.data.otherUser,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'get-user',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'get-user',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+}
+
+export const resetUser = ()=> async (dispatch)=> {
+    dispatch({
+        type: 'reset-user'
+    });
+}
+
 export const logout = ()=> async (dispatch)=> {
     localStorage.clear();
     dispatch({

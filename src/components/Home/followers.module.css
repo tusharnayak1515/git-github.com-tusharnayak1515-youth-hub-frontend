@@ -42,6 +42,20 @@
     color: black;
 }
 
+.followers .fuser button {
+    padding: 0.4rem 0.7rem;
+    font-size: 1.1rem;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #022f95;
+}
+
+.followers .fuser button:hover {
+    background-color: #003ac1;
+}
+
 .noUser {
     color: black !important;
 }

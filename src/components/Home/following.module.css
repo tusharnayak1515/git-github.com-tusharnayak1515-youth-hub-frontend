@@ -4,7 +4,6 @@
     width: 90%;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     /* background-color: red; */
 }
 
@@ -31,15 +30,36 @@
     align-items: center;
 }
 
-.following .fuser img {
+.following .fuser .first img {
     width: 2.5rem;
     border: 0.2rem solid #022f95;
     border-radius: 50%;
     margin-right: 0.5rem;
 }
 
-.following .fuser h4 {
+.following .fuser .first h4 {
     color: black;
+    cursor: pointer;
+}
+
+.following .fuser .first h4:hover {
+    text-decoration: underline;
+}
+
+.following .fuser button {
+    padding: 0.4rem 0.7rem;
+    font-size: 1.1rem;
+    color: #022f95;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    /* background-color: #022f95; */
+    background-color: white;
+}
+
+.following .fuser button:hover {
+    color: white;
+    background-color: #003ac1;
 }
 
 .noUser {

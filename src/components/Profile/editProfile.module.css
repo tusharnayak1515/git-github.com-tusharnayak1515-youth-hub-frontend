@@ -51,12 +51,17 @@
     font-weight: bold;
     font-size: 1.3rem;
     color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     border: none;
     border-radius: 0.5rem;
-    background-color: #169f7a;
+    /* background-color: #169f7a; */
+    background-color: #022f95;
 }
 
 .btn:hover {
-    background-color: #1fc798;
+    /* background-color: #1fc798; */
+    background-color: #0335ab;
 }

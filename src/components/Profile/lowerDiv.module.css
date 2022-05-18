@@ -36,3 +36,10 @@
     height: 100%;
     border-radius: 0.3rem;
 }
+
+.lowerDiv .posts .noposts {
+    width: auto;
+    margin: auto;
+    margin-top: 1rem;
+    color: grey;
+}

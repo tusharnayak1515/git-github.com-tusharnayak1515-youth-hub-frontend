@@ -54,8 +54,7 @@ const Navbar = () => {
       <Link
         to="/profile"
         className={
-          location.pathname === "/profile" ||
-          location.pathname === "/editprofile"
+          location.pathname === "/profile"
             ? `${styles.links} ${styles.active}`
             : `${styles.links}`
         }

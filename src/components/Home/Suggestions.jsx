@@ -9,8 +9,6 @@ const Suggestions = () => {
   const dispatch = useDispatch();
   const {suggestions, profile} = useSelector(state=> state.userReducer,shallowEqual);
 
-  // const followingLength = [...profile.following].length;
-
   useEffect(()=> {
     // console.log(followingLength);
     dispatch(actionCreators.getSuggestions());

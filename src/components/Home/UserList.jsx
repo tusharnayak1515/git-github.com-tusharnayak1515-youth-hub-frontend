@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { actionCreators } from '../../redux';
 
 import styles from './userList.module.css';
 
 const UserList = ({user}) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onFollow = (e)=> {
@@ -12,10 +14,15 @@ const UserList = ({user}) => {
     dispatch(actionCreators.follow(user._id));
   }
 
+  const redirect = (e,id)=> {
+    e.preventDefault();
+    navigate(`/users/${id}`, {replace: true});
+  }
+
   return (
-    <div className={styles.userList}>
+    <div className={styles.userList} onClick={(e)=> redirect(e,user._id)}>
         <img src={user.profilepic} alt={user.name} />
-        <h4>{user.name}</h4>
+        <h4>{user.username}</h4>
         <button onClick={onFollow}>Follow</button>
     </div>
   )

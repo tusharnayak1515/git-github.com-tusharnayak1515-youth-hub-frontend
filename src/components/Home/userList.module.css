@@ -1,5 +1,5 @@
 .userList {
-    width: 95%;
+    width: 90%;
     padding: 0.5rem;
     margin-bottom: 1rem;
     display: flex;
@@ -18,11 +18,16 @@
 }
 
 .userList h4 {
-    margin-right: 0.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.userList h4:hover {
+    text-decoration: underline;
 }
 
 .userList button {
-    padding: 0.2rem 0.5rem;
+    padding: 0.3rem 0.7rem;
     font-size: 1.1rem;
     color: white;
     border: none;

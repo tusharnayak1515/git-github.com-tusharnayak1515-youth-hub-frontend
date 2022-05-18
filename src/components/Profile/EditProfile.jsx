@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { actionCreators } from "../../redux";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 import Modal from "../Modal/Modal";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 import styles from "./editProfile.module.css";
 
@@ -75,7 +76,9 @@ const EditProfile = () => {
       </div>
 
       <button className={styles.btn} onClick={onEdit}>Submit</button>
-      <button className={styles.btn} onClick={()=> navigate('/profile', {replace: true})}>Back To Profile</button>
+      <button className={styles.btn} onClick={()=> navigate('/profile', {replace: true})}>
+        <KeyboardBackspaceIcon style={{textAlign: 'center'}} /> Back To Profile
+      </button>
       {error !== "" && <h3>{error}</h3>}
       {show && <Modal setShow={setShow} profile={profile && profile} />}
     </div>

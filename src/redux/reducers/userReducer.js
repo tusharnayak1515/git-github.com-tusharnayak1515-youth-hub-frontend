@@ -36,6 +36,7 @@ const initState = {
     profile: isProfile,
     suggestions: isSuggestions,
     searchedUsers: [],
+    otherUser: null,
     error: isError,
     isLoading: false
 }
@@ -46,6 +47,13 @@ const userReducer = (state=initState, action)=> {
         return {
             ...state,
             isLoading: true
+        }
+    }
+
+    else if(action.type === 'reset-user') {
+        return {
+            ...state,
+            otherUser: null
         }
     }
 
@@ -214,6 +222,25 @@ const userReducer = (state=initState, action)=> {
             return {
                 ...state,
                 searchedUsers: users,
+                isLoading: false,
+                error: null
+            }
+        }
+    }
+
+    else if(action.type === 'get-user') {
+        const {otherUser,error} = action.payload;
+        if(error) {
+            return {
+                ...state,
+                error: error,
+                isLoading: false
+            }
+        }
+        else {
+            return {
+                ...state,
+                otherUser: otherUser,
                 isLoading: false,
                 error: null
             }

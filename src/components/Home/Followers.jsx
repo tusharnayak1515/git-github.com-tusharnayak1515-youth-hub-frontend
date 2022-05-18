@@ -7,9 +7,21 @@ import styles from "./followers.module.css";
 const Followers = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.userReducer, shallowEqual);
+
+  const unfollow = (e, id) => {
+    e.preventDefault();
+    dispatch(actionCreators.unfollow(id));
+  };
+
+  const follow = (e, id) => {
+    e.preventDefault();
+    dispatch(actionCreators.follow(id));
+  };
+
   useEffect(() => {
     dispatch(actionCreators.profile());
   }, [dispatch]);
+
   return (
     <div className={styles.followers}>
       <h4 className={styles.head}>FOLLOWERS</h4>
@@ -23,9 +35,15 @@ const Followers = () => {
               <div key={fuser._id} className={styles.fuser}>
                 <div className={styles.first}>
                   <img src={fuser.profilepic} alt={fuser.name} />
-                  <h4>{fuser.name}</h4>
+                  <h4>{fuser.username}</h4>
                 </div>
-                <h6>{new Date().getSeconds()}</h6>
+                {profile.following.includes(fuser._id) ? (
+                  <button onClick={(e) => unfollow(e, fuser._id)}>
+                    Unfollow
+                  </button>
+                ) : (
+                  <button onClick={(e) => follow(e, fuser._id)}>Follow</button>
+                )}
               </div>
             );
           }

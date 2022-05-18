@@ -21,8 +21,8 @@ const UserProfile = () => {
 
   return (
     <div className={styles.userProfile}>
-        <UpperDiv profile={profile} /> 
-        <LowerDiv profile={profile} />
+        <UpperDiv myprofile={profile} profile={profile} /> 
+        <LowerDiv myprofile={profile} />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import UserProfilePage from './pages/ProfilePage/UserProfilePage';
 import EditProfilePage from './pages/ProfilePage/EditProfilePage';
 import MessagePage from './pages/MessagePage/MessagePage';
 import SearchPage from './pages/SearchPage/SearchPage';
+import OtherProfilepage from './pages/Other_ProfilePage/OtherProfilepage';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ function App() {
         <Route exact path='/editprofile' element={<EditProfilePage />} />
         <Route exact path='/message' element={<MessagePage />} />
         <Route exact path='/search' element={<SearchPage />} />
+        <Route exact path='/users/:id' element={<OtherProfilepage />} />
       </Routes>
     </div>
   );

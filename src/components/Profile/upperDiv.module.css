@@ -46,7 +46,7 @@
     font-weight: normal !important;
 }
 
-.upperDiv .rightDiv .details button {
+.upperDiv .rightDiv .details .editbtn {
     padding: 0.2rem 0.5rem;
     font-size: 1.2rem;
     outline: none;
@@ -54,6 +54,37 @@
     border-radius: 0.3rem;
     cursor: pointer;
     background-color: white;
+}
+
+.upperDiv .rightDiv .details .unfollowbtn {
+    padding: 0.2rem 0.5rem;
+    font-size: 1.2rem;
+    color: #022f95;
+    outline: none;
+    border: 0.05rem solid rgb(185, 185, 185);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    background-color: white;
+}
+
+.upperDiv .rightDiv .details .unfollowbtn:hover {
+    color: white;
+    background-color: #022f95;
+}
+
+.upperDiv .rightDiv .details .followbtn {
+    padding: 0.2rem 0.5rem;
+    font-size: 1.2rem;
+    color: white;
+    outline: none;
+    border: 0.05rem solid rgb(185, 185, 185);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    background-color: #022f95;
+}
+
+.upperDiv .rightDiv .details .followbtn:hover {
+    background-color: #023bbf;
 }
 
 .links {
