@@ -28,8 +28,8 @@ const Register = () => {
     if (name.replace(/\s/g, "").trim().length < 5) {
       setError("Name cannot be less than 5 characters!");
     }
-    else if (username.replace(/\s/g, "").trim().length < 5) {
-      setError("Username cannot be less than 5 characters!");
+    else if ((username.replace(/\s/g, "").trim().length < 5) || (username.replace(/\s/g, "").trim().length > 15)) {
+      setError("Username cannot be less than 5 characters and more than 15 characters!");
     }
     else if (!email.toLowerCase().match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
       setError("Enter a valid email!");

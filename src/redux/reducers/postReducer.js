@@ -23,7 +23,7 @@ const initState = {
 
 const postReducer = (state=initState, action)=> {
 
-    if(action.type === 'loading') {
+    if(action.type === 'post-loading') {
         return {
             ...state,
             isLoading: true

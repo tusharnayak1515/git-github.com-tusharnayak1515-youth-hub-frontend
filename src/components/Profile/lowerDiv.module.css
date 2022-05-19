@@ -9,10 +9,14 @@
 }
 
 .lowerDiv .posts {
-    width: 100%;
+    min-width: 70%;
+    max-width: 100%;
     /* padding: 0 1rem; */
+    /* margin: 0 auto; */
     margin-top: 1rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-self: flex-start;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
@@ -23,12 +27,18 @@
     width: 23vw;
     height: 20vw;
     display: flex;
-    margin: 1rem 0;
+    margin: 1rem 2rem;
+    margin-left: 0;
     justify-content: center;
     align-items: center;
     border: 0.05rem solid rgb(214, 214, 214);
     border-radius: 0.3rem;
+    cursor: pointer;
     /* background-color: greenyellow; */
+}
+
+.lowerDiv .posts .post:hover {
+    opacity: 0.8;
 }
 
 .lowerDiv .posts .post img {

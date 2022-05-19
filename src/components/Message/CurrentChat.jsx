@@ -6,7 +6,7 @@ import MsgLoading from "../../UI/MsgLoading";
 
 import styles from "./currentChat.module.css";
 
-const CurrentChat = ({ profile, receiver, setReceiver, sender, setSender, click, setOnlineUsers }) => {
+const CurrentChat = ({ profile, currentCnv, receiver, setReceiver, sender, setSender, click, setOnlineUsers }) => {
   const dispatch = useDispatch();
   const messages = useSelector((state) => state.messageReducer.messages,shallowEqual);
   const isLoading = useSelector(state=> state.messageReducer.isLoading,shallowEqual);
@@ -80,12 +80,13 @@ const CurrentChat = ({ profile, receiver, setReceiver, sender, setSender, click,
   },[profile._id, dispatch]);
   
   useEffect(() => {
-    // console.log("run");
-    if (receiver) {
+    // console.log("receiver: ", receiver?._id);
+    // console.log("sender: ", sender?._id);
+    if (receiver?._id) {
       dispatch(actionCreators.getMessages(receiver?._id,sender?._id));
     }
     // eslint-disable-next-line
-  }, [dispatch, receiver?._id, sender?._id]);
+  }, [dispatch, receiver?._id, sender?._id, messages?.length]);
 
   useEffect(()=> {
     // console.log("run");
@@ -99,20 +100,25 @@ const CurrentChat = ({ profile, receiver, setReceiver, sender, setSender, click,
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // useEffect(() => {
+  //   console.log("bhak");
+  //   dispatch(actionCreators.getConversations());
+  // }, [dispatch, currentCnv.text]);
+
   if (isLoading) {
     return <MsgLoading />;
   }
 
   return (
     <div className={styles.currentChat}>
-      {click && receiver && messages.length !== 0 && (
+      {click && receiver && (
         <div className={styles.receiver}>
           <img src={receiver.profilepic} alt={receiver.username} />
           <h2>{receiver.name}</h2>
         </div>
       )}
       <div className={styles.messageArea}>
-        {click && messages.length !== 0 && receiver ? (
+        {click && receiver ? (
           messages.map((chat) => {
             return (
               <Fragment key={chat._id}>
@@ -152,7 +158,7 @@ const CurrentChat = ({ profile, receiver, setReceiver, sender, setSender, click,
           </div>
         )}
       </div>
-      {click && receiver && messages.length !== 0 && (
+      {click && receiver && (
         <div className={styles.messageBox} onClick={onInputClick}>
           <input
             type="text"

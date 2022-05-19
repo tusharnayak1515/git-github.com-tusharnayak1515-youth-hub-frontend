@@ -23,7 +23,7 @@
 }
 
 .upperDiv .rightDiv {
-    width: 60%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -32,9 +32,10 @@
 }
 
 .upperDiv .rightDiv .details {
-    width: 60%;
+    min-width: 65%;
     padding: 1rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     /* background-color: orange; */
@@ -87,13 +88,30 @@
     background-color: #023bbf;
 }
 
+.upperDiv .rightDiv .details .msgbtn {
+    padding: 0.2rem 0.5rem;
+    font-size: 1.2rem;
+    color: white;
+    outline: none;
+    border: 0.05rem solid rgb(185, 185, 185);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    background-color: #022f95;
+}
+
+.upperDiv .rightDiv .details .msgbtn:hover {
+    border: 0.05rem solid #022f95;
+    color: #022f95;
+    background-color: white;
+}
+
 .links {
     font-size: 2rem;
     cursor: pointer;
 }
 
 .upperDiv .rightDiv .counts {
-    width: 60%;
+    width: 65%;
     padding: 0.5rem 1.2rem;
     margin-bottom: 0.5rem;
     display: flex;
@@ -107,13 +125,13 @@
 }
 
 .upperDiv .rightDiv .name {
-    width: 60%;
+    width: 65%;
     padding: 0.5rem 1.1rem;
     /* background-color: aqua; */
 }
 
 .upperDiv .rightDiv .bio {
-    width: 60%;
+    width: 65%;
     padding: 0.5rem 1.1rem;
     display: flex;
     justify-content: flex-start;

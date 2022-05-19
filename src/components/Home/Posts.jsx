@@ -10,11 +10,11 @@ const Posts = () => {
   const dispatch = useDispatch();
   const {posts, isLoading} = useSelector(state=> state.postReducer,shallowEqual);
 
-  const postLength = posts && posts.length;
+  const orderedPosts = posts && [...posts].reverse();
 
   useEffect(()=> {
       dispatch(actionCreators.getPosts());
-  },[dispatch,postLength]);
+  },[dispatch,posts?.length]);
 
   if(isLoading) {
       return <LoadingSpinner />
@@ -22,7 +22,7 @@ const Posts = () => {
 
   return (
     <div className={styles.posts}>
-        {posts && posts.length === 0 ? <h3>No Posts to show!</h3> : posts.map((post)=> {
+        {orderedPosts && orderedPosts.length === 0 ? <h3>No Posts to show!</h3> : orderedPosts.map((post)=> {
             return <Post key={post._id} post={post} />
         })}
     </div>

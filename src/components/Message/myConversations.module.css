@@ -14,6 +14,7 @@
     position: sticky;
     top: 0;
     padding: 0.5rem;
+    max-height: 12vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -45,6 +46,8 @@
 }
 
 .cflex {
+    /* max-height: 100%; */
+    width: 100%;
     margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;

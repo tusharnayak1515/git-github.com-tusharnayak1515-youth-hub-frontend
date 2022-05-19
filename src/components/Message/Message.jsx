@@ -101,6 +101,7 @@ const Message = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.userReducer,shallowEqual);
   const [click, setClick] = useState(false);
+  const [currentCnv, setCurrentCnv] = useState({});
   const [receiver, setReceiver] = useState();
   const [sender, setSender] = useState();
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -111,8 +112,8 @@ const Message = () => {
   }, [dispatch]);
   return (
     <div className={styles.message_container}>
-      <MyConversations profile={profile} setClick={setClick} setReceiver={setReceiver} setSender={setSender} onlineUsers={onlineUsers} />
-      <CurrentChat profile={profile} receiver={receiver} setReceiver={setReceiver} sender={sender} setSender={setSender} click={click} setOnlineUsers={setOnlineUsers} />
+      <MyConversations profile={profile} setClick={setClick} setCurrentCnv={setCurrentCnv} setReceiver={setReceiver} setSender={setSender} onlineUsers={onlineUsers} />
+      <CurrentChat profile={profile} currentCnv={currentCnv} receiver={receiver} setReceiver={setReceiver} sender={sender} setSender={setSender} click={click} setOnlineUsers={setOnlineUsers} />
     </div>
   );
 };

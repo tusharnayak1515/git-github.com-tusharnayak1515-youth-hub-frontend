@@ -4,7 +4,7 @@ import PowerSettingsNewOutlinedIcon from "@mui/icons-material/PowerSettingsNewOu
 
 import styles from "./upperDiv.module.css";
 import { IconButton } from "@mui/material";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actionCreators } from "../../redux";
 import Modal from "../Modal/Modal";
 
@@ -19,14 +19,20 @@ const UpperDiv = ({ myprofile, profile }) => {
     navigate("/editprofile", { replace: true });
   };
 
-  const follow = (e,id)=> {
+  const follow = (e, id) => {
     e.preventDefault();
     dispatch(actionCreators.follow(id));
   }
 
-  const unfollow = (e,id)=> {
+  const unfollow = (e, id) => {
     e.preventDefault();
     dispatch(actionCreators.unfollow(id));
+  }
+
+  const redirect = (e) => {
+    e.preventDefault();
+    dispatch(actionCreators.newCnv(profile._id, myprofile._id))
+    navigate('/message', { replace: true });
   }
 
   const onLogout = (e) => {
@@ -34,9 +40,9 @@ const UpperDiv = ({ myprofile, profile }) => {
     dispatch(actionCreators.logout());
   };
 
-  useEffect(()=> {
-    for(let i=0; i < profile.following.length; i++) {
-      if(profile.following[i]._id === myprofile?._id) {
+  useEffect(() => {
+    for (let i = 0; i < profile.following.length; i++) {
+      if (profile.following[i]._id === myprofile?._id) {
         setIsFollowing(true);
         break;
       }
@@ -45,7 +51,7 @@ const UpperDiv = ({ myprofile, profile }) => {
       }
     }
     // eslint-disable-next-line
-  },[dispatch, myprofile?._id, profile.following.length]);
+  }, [dispatch, myprofile?._id, profile.following.length]);
 
   return (
     <div className={styles.upperDiv}>
@@ -60,9 +66,15 @@ const UpperDiv = ({ myprofile, profile }) => {
           {myprofile._id === profile._id ? (
             <button onClick={onEditClick} className={styles.editbtn}>Edit Profile</button>
           ) : isFollowing ? (
-            <button onClick={(e)=> unfollow(e, myprofile._id)} className={styles.unfollowbtn}>Unfollow</button>
+            <>
+              <button className={styles.msgbtn} onClick={redirect}>Message</button>
+              <button onClick={(e) => unfollow(e, myprofile._id)} className={styles.unfollowbtn}>Unfollow</button>
+            </>
           ) : (
-            <button onClick={(e)=> follow(e, myprofile._id)} className={styles.followbtn}>Follow</button>
+            <>
+              <button className={styles.msgbtn} onClick={redirect}>Message</button>
+              <button onClick={(e) => follow(e, myprofile._id)} className={styles.followbtn}>Follow</button>
+            </>
           )}
           {myprofile._id === profile._id && (
             <IconButton
@@ -91,7 +103,7 @@ const UpperDiv = ({ myprofile, profile }) => {
         </div>
 
         <div className={styles.bio}>
-          {myprofile.bio && <h2>- {myprofile.bio}</h2>}
+          {myprofile.bio ? <h2>- {myprofile.bio}</h2> : <h2>- bio</h2>}
         </div>
         {show && <Modal setShow={setShow} profile={profile} />}
       </div>

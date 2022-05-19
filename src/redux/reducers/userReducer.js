@@ -43,7 +43,7 @@ const initState = {
 
 const userReducer = (state=initState, action)=> {
 
-    if(action.type === 'loading') {
+    if(action.type === 'user-loading') {
         return {
             ...state,
             isLoading: true

@@ -1,0 +1,7 @@
+.postPage {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    justify-content: center;
+    /* background-color: greenyellow; */
+}

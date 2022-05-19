@@ -1,0 +1,73 @@
+.comments {
+    width: 100%;
+    min-height: 10rem;
+    max-height: 10rem;
+    /* margin: 0 auto; */
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    border-top: 0.05rem solid rgb(201, 201, 201);
+    border-bottom: 0.05rem solid rgb(201, 201, 201);
+    /* background-color: yellow; */
+}
+
+.comments::-webkit-scrollbar {
+    display: none;
+}
+
+.comments {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.comments .comment {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    /* background-color: pink; */
+}
+
+.comments .comment img {
+    width: 2rem;
+    height: 2rem;
+    border: 0.1rem solid #022f95;
+    border-radius: 50%;
+}
+
+.comments .comment h4 {
+    margin: 0 0.5rem;
+}
+
+/* .commentdiv {
+    background-color: aquamarine;
+} */
+
+.flex {
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: beige; */
+}
+
+.icons {
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+.editicon:hover {
+    color: grey;
+}
+
+.liked {
+    color: red;
+}
+
+.liked:hover {
+    color: grey;
+}
+
+.deleteicon:hover, .unliked:hover {
+    color: red;
+}

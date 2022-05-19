@@ -1,29 +1,40 @@
 import React from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { actionCreators } from "../../redux";
+import { useNavigate } from "react-router-dom";
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json'
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
-import { actionCreators } from "../../redux";
 // import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 import styles from "./post.module.css";
 
 const Post = ({ post }) => {
+  TimeAgo.addDefaultLocale(en);
+  const timeAgo = new TimeAgo('en-US');
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.userReducer, shallowEqual);
 
-  const onUnlike = () => {
-    console.log(post.likes.includes(profile._id));
+  const onUnlike = (e) => {
+    e.preventDefault();
     dispatch(actionCreators.unlikePost(post._id));
   };
 
-  const onLike = () => {
-    console.log(post.likes.includes(profile._id));
+  const onLike = (e) => {
+    e.preventDefault();
     dispatch(actionCreators.likePost(post._id));
   };
+
+  const redirect = (e, id) => {
+    e.preventDefault();
+    navigate(`posts/${id}`, { replace: true });
+  }
 
   return (
     <div className={styles.post}>
@@ -62,7 +73,7 @@ const Post = ({ post }) => {
               />
             </IconButton>
           )}
-          <IconButton>
+          <IconButton onClick={(e) => redirect(e, post._id)}>
             <ChatBubbleOutlineOutlinedIcon
               style={{ fontSize: "1.5rem", cursor: "pointer" }}
             />
@@ -91,11 +102,17 @@ const Post = ({ post }) => {
       </div>
 
       {post.comments.length === 0 ? (
-        <h3 className={styles.comments}>No comments yet!</h3>
+        <>
+          <h3 className={styles.comments}>No comments yet!</h3>
+          <h4 className={styles.comments}>{timeAgo.format(post.createdAt)}</h4>
+        </>
       ) : (
-        <h3 className={styles.comments}>
-          View all {post.comments.length} comments
-        </h3>
+        <>
+          <h3 className={styles.comments} onClick={(e) => redirect(e, post._id)}>
+            View all {post.comments.length} comments
+          </h3>
+          <h4 className={styles.comments}>{timeAgo.format(post.createdAt)}</h4>
+        </>
       )}
     </div>
   );

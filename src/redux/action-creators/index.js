@@ -3,7 +3,7 @@ import axios from "axios";
 // ****************USER SECTION*************\\
 export const register = ({name,username,email,password})=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'user-loading'
     });
 
     try {
@@ -42,7 +42,7 @@ export const register = ({name,username,email,password})=> async (dispatch)=> {
 
 export const login = ({email,password})=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'user-loading'
     });
 
     try {
@@ -81,7 +81,7 @@ export const login = ({email,password})=> async (dispatch)=> {
 
 export const profile = ()=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'user-loading'
     });
 
     const token = localStorage.getItem("youth_token");
@@ -121,7 +121,7 @@ export const profile = ()=> async (dispatch)=> {
 
 export const editProfile = ({name,username,email,profilepic,bio})=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'user-loading'
     });
 
     const token = localStorage.getItem("youth_token");
@@ -163,7 +163,7 @@ export const editProfile = ({name,username,email,profilepic,bio})=> async (dispa
 
 export const addDp = (pic)=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'user-loading'
     });
 
     const token = localStorage.getItem("youth_token");
@@ -214,7 +214,7 @@ export const addDp = (pic)=> async (dispatch)=> {
 
 export const getSuggestions = ()=> async (dispatch)=> {
     // dispatch({
-    //     type: 'loading'
+    //     type: 'user-loading'
     // });
 
     const token = localStorage.getItem("youth_token");
@@ -254,7 +254,7 @@ export const getSuggestions = ()=> async (dispatch)=> {
 
 export const follow = (id)=> async (dispatch)=> {
     // dispatch({
-    //     type: 'loading'
+    //     type: 'user-loading'
     // });
 
     const token = localStorage.getItem("youth_token");
@@ -294,7 +294,7 @@ export const follow = (id)=> async (dispatch)=> {
 
 export const unfollow = (id)=> async (dispatch)=> {
     // dispatch({
-    //     type: 'loading'
+    //     type: 'user-loading'
     // });
 
     const token = localStorage.getItem("youth_token");
@@ -334,7 +334,7 @@ export const unfollow = (id)=> async (dispatch)=> {
 
 export const search = (name)=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'user-loading'
     });
 
     const token = localStorage.getItem("youth_token");
@@ -373,7 +373,7 @@ export const search = (name)=> async (dispatch)=> {
 
 export const getUser = (id)=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'user-loading'
     });
 
     const token = localStorage.getItem("youth_token");
@@ -425,9 +425,9 @@ export const logout = ()=> async (dispatch)=> {
 
 // *************MESSAGE SECTION******************\\
 export const getConversations = ()=> async (dispatch)=> {
-    // dispatch({
-    //     type: 'msg-loading'
-    // });
+    dispatch({
+        type: 'convo-loading'
+    });
 
     const token = localStorage.getItem("youth_token");
     try {
@@ -547,7 +547,7 @@ export const receiveMessages = (receiverId,senderId)=> async (dispatch)=> {
 
 export const sendMessage = ({socket,text,images,receiverId,senderId})=> async (dispatch)=> {
     // dispatch({
-    //     type: 'loading'
+    //     type: 'msg-loading'
     // });
 
     const token = localStorage.getItem("youth_token");
@@ -589,11 +589,54 @@ export const sendMessage = ({socket,text,images,receiverId,senderId})=> async (d
     }
 }
 
+export const newCnv = (senderId, receiverId)=> async (dispatch)=> {
+    dispatch({
+        type: 'convo-loading'
+    });
+
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.post(`http://localhost:5000/api/message/newcnv/${senderId}/${receiverId}`,
+        {},
+        {headers: {'auth-token': token}});
+
+        if(res.data.success) {
+            localStorage.setItem("youth_conversations",JSON.stringify(res.data.conversations));
+            dispatch({
+                type: 'new-cnv',
+                payload: {
+                    cnv: res.data.conversations,
+                    msgs: res.data.messages,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'new-cnv',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'new-cnv',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+}
+
 // ******************POST SECTION***************\\
 
 export const getPosts = ()=> async (dispatch)=> {
     dispatch({
-        type: 'loading'
+        type: 'post-loading'
     });
 
     const token = localStorage.getItem("youth_token");
@@ -704,4 +747,229 @@ export const unlikePost = (id)=> async (dispatch)=> {
         });
     }
 
+}
+
+// ***************Comment Section****************\\
+
+export const getComments = ()=> async (dispatch)=> {
+    dispatch({
+        type: 'comment-loading'
+    });
+
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.get(`http://localhost:5000/api/comments/`,{headers: {'auth-token': token}});
+        
+        if(res.data.success) {
+            localStorage.setItem("youth_comments",JSON.stringify(res.data.comments));
+            dispatch({
+                type: 'get-comments',
+                payload: {
+                    comments: res.data.comments,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'get-comments',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'get-comments',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+} 
+
+export const addComment = (id,comment)=> async (dispatch)=> {
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.post(`http://localhost:5000/api/comments/addcomment/${id}`,{comment},{headers: {'auth-token': token}});
+        
+        if(res.data.success) {
+            localStorage.setItem("youth_posts",JSON.stringify(res.data.posts));
+            localStorage.setItem("youth_comments",JSON.stringify(res.data.comments));
+            dispatch({
+                type: 'add-comment',
+                payload: {
+                    comments: res.data.comments,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'add-comment',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'add-comment',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+}
+
+export const editComment = (commentId,comment)=> async (dispatch)=> {
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.put(`http://localhost:5000/api/comments/editcomment/${commentId}`,{comment},{headers: {'auth-token': token}});
+        
+        if(res.data.success) {
+            localStorage.setItem("youth_posts",JSON.stringify(res.data.posts));
+            localStorage.setItem("youth_comments",JSON.stringify(res.data.comments));
+            dispatch({
+                type: 'edit-comment',
+                payload: {
+                    comments: res.data.comments,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'edit-comment',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'edit-comment',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+}
+
+export const deleteComment = (postId,commentId)=> async (dispatch)=> {
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.delete(`http://localhost:5000/api/comments/deletecomment/${postId}/${commentId}`,{headers: {'auth-token': token}});
+
+        if(res.data.success) {
+            localStorage.setItem("youth_posts",JSON.stringify(res.data.posts));
+            localStorage.setItem("youth_comments",JSON.stringify(res.data.comments));
+            dispatch({
+                type: 'delete-comment',
+                payload: {
+                    comments: res.data.comments,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'delete-comment',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'delete-comment',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+}
+
+export const likeComment = (id)=> async (dispatch)=> {
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.put(`http://localhost:5000/api/comments/likecomment/${id}`,{},{headers: {'auth-token': token}});
+        
+        if(res.data.success) {
+            localStorage.setItem("youth_comments",JSON.stringify(res.data.comments));
+            dispatch({
+                type: 'like-comment',
+                payload: {
+                    comments: res.data.comments,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'like-comment',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'like-comment',
+            payload: {
+                error: error.message
+            }
+        });
+    }
+}
+
+export const unlikeComment = (id)=> async (dispatch)=> {
+    const token = localStorage.getItem("youth_token");
+    try {
+        const res = await axios.put(`http://localhost:5000/api/comments/unlikecomment/${id}`,{},{headers: {'auth-token': token}});
+        
+        if(res.data.success) {
+            localStorage.setItem("youth_comments",JSON.stringify(res.data.comments));
+            dispatch({
+                type: 'like-comment',
+                payload: {
+                    comments: res.data.comments,
+                    error: null
+                }
+            });
+        }
+
+        if(res.data.error) {
+            localStorage.setItem("youth_error",res.data.error);
+            dispatch({
+                type: 'like-comment',
+                payload: {
+                    error: res.data.error
+                }
+            });
+        }
+
+    } catch (error) {
+        dispatch({
+            type: 'like-comment',
+            payload: {
+                error: error.message
+            }
+        });
+    }
 }

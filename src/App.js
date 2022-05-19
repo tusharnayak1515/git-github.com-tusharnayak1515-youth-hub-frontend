@@ -10,6 +10,7 @@ import SearchPage from './pages/SearchPage/SearchPage';
 import OtherProfilepage from './pages/Other_ProfilePage/OtherProfilepage';
 
 import './App.css';
+import PostPage from './pages/PostPage/PostPage';
 
 function App() {
   // const {user} = useSelector(state=> state.userReducer,shallowEqual);
@@ -24,6 +25,7 @@ function App() {
         <Route exact path='/message' element={<MessagePage />} />
         <Route exact path='/search' element={<SearchPage />} />
         <Route exact path='/users/:id' element={<OtherProfilepage />} />
+        <Route exact path='/posts/:id' element={<PostPage />} />
       </Routes>
     </div>
   );

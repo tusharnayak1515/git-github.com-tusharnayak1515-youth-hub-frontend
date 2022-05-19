@@ -19,6 +19,7 @@ const initState = {
     conversations: isConversations,
     messages: [],
     error: isError,
+    load: false,
     isLoading: false
 }
 
@@ -28,6 +29,13 @@ const messageReducer = (state=initState, action)=> {
         return {
             ...state,
             isLoading: true
+        }
+    }
+
+    else if(action.type === 'convo-loading') {
+        return {
+            ...state,
+            load: true
         }
     }
 
@@ -63,6 +71,7 @@ const messageReducer = (state=initState, action)=> {
             return {
                 ...state,
                 conversations: cnvs,
+                load: false,
                 isLoading: false,
                 error: null
             }
@@ -88,8 +97,8 @@ const messageReducer = (state=initState, action)=> {
         }
     }
 
-    else if(action.type === 'add-cnv') {
-        const {cnv,error} = action.payload;
+    else if(action.type === 'new-cnv') {
+        const {cnvs,msgs,error} = action.payload;
         if(error) {
             return {
                 ...state,
@@ -100,10 +109,9 @@ const messageReducer = (state=initState, action)=> {
         else {
             return {
                 ...state,
-                conversations: [
-                    ...state.conversations,
-                    cnv
-                ],
+                conversations: cnvs,
+                messages: msgs,
+                load: false,
                 isLoading: false,
                 error: null
             }
