@@ -41,22 +41,41 @@
 
 .followers .fuser h4 {
     color: black;
-}
-
-.followers .fuser button {
-    padding: 0.4rem 0.7rem;
-    font-size: 1.1rem;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
     cursor: pointer;
-    background-color: #022f95;
 }
 
-.followers .fuser button:hover {
-    background-color: #003ac1;
+.followers .fuser h4:hover {
+    text-decoration: underline;
 }
 
 .noUser {
     color: black !important;
+}
+
+.unfollowbtn, .followbtn {
+    padding: 0.4rem 0.7rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.unfollowbtn {
+    color: #022f95;
+    background-color: white;
+}
+
+.unfollowbtn:hover {
+    color: white;
+    background-color: #003ac1;
+}
+
+.followbtn {
+    color: white;
+    background-color: #022f95;
+}
+
+.followbtn:hover {
+    color: #022f95;
+    background-color: white;
 }

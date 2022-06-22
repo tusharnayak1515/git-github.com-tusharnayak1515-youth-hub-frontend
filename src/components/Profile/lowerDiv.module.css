@@ -18,8 +18,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     align-self: flex-start;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    /* justify-content: space-between; */
     /* background-color: orange; */
 }
 
@@ -47,7 +46,15 @@
     border-radius: 0.3rem;
 }
 
-.lowerDiv .posts .noposts {
+.lowerDiv .emptyPost {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lowerDiv .noposts {
     width: auto;
     margin: auto;
     margin-top: 1rem;

@@ -20,9 +20,9 @@ const UserList = ({user}) => {
   }
 
   return (
-    <div className={styles.userList} onClick={(e)=> redirect(e,user._id)}>
+    <div className={styles.userList}>
         <img src={user.profilepic} alt={user.name} />
-        <h4>{user.username}</h4>
+        <h4 onClick={(e)=> redirect(e,user._id)}>{user.username}</h4>
         <button onClick={onFollow}>Follow</button>
     </div>
   )

@@ -15,7 +15,7 @@ import { IconButton } from "@mui/material";
 import styles from "./post.module.css";
 
 const Post = ({ post }) => {
-  TimeAgo.addDefaultLocale(en);
+  TimeAgo.addLocale(en);
   const timeAgo = new TimeAgo('en-US');
   const navigate = useNavigate();
   const dispatch = useDispatch();

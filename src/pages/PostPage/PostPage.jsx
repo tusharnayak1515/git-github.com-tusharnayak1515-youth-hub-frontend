@@ -26,7 +26,7 @@ const PostPage = () => {
     else {
       dispatch(actionCreators.getPosts());
     }
-  },[user, comments.length, navigate, dispatch]);
+  },[user, comments?.length, navigate, dispatch]);
 
   return (
     <div className={styles.postPage}>

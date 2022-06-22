@@ -28,7 +28,7 @@ const OtherProfilepage = () => {
     return ()=> {
         dispatch(actionCreators.resetUser());
     }
-  },[user, id, profile.following.length, dispatch, navigate]);
+  },[user, id, profile?.following.length, dispatch, navigate]);
 
   if(isLoading && !otherUser) {
     return <LoadingSpinner />
